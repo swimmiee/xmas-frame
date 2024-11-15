@@ -16,7 +16,7 @@ export const app = new Frog({
 
 app.use("/*", serveStatic({ root: "./public" }));
 
-app.frame("/", (c) => {
+app.frame("/tree/:id", (c) => {
   const { buttonValue, inputText, status } = c;
   const fruit = inputText || buttonValue;
   return c.res({
