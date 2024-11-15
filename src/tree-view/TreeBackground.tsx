@@ -1,4 +1,4 @@
-import { Box, Image } from "./ui";
+import { Box, Image } from "../ui";
 
 interface TreeBackgroundProps {
   no: number;

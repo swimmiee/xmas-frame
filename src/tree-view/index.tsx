@@ -1,7 +1,7 @@
 import { serveStatic } from "@hono/node-server/serve-static";
 import { Button, Frog, TextInput } from "frog";
 import { devtools } from "frog/dev";
-import { Box, Image, vars } from "./ui";
+import { Box, vars } from "../ui";
 import { TreeBackground } from "./TreeBackground";
 import { PlainTree } from "./PlainTree";
 import { Ornament } from "./Ornament";
