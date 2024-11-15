@@ -1,24 +1,12 @@
-import { serveStatic } from "@hono/node-server/serve-static";
-import { Button, Frog, TextInput } from "frog";
-import { devtools } from "frog/dev";
-import { Box, vars } from "../ui";
+import { Button, Env, FrameHandler, TextInput } from "frog";
+import { Box } from "../ui";
 import { TreeBackground } from "./TreeBackground";
 import { PlainTree } from "./PlainTree";
 import { Ornament } from "./Ornament";
-// import { neynar } from 'frog/hubs'
+import { BlankInput } from "hono/types";
 
-export const app = new Frog({
-  // Supply a Hub to enable frame verification.
-  // hub: neynar({ apiKey: 'NEYNAR_FROG_FM' })
-  title: "Frog Frame",
-  ui: { vars },
-});
-
-app.use("/*", serveStatic({ root: "./public" }));
-
-app.frame("/tree/:id", (c) => {
-  const { buttonValue, inputText, status } = c;
-  const fruit = inputText || buttonValue;
+const TreeMain: FrameHandler<Env, "/", BlankInput> = (c) => {
+  const { status } = c;
   return c.res({
     imageAspectRatio: "1:1",
     image: (
@@ -51,6 +39,6 @@ app.frame("/tree/:id", (c) => {
       status === "response" && <Button.Reset>Reset</Button.Reset>,
     ],
   });
-});
+};
 
-devtools(app, { serveStatic });
+export default TreeMain;
