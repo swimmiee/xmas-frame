@@ -1,12 +1,16 @@
-import { Button, Env, FrameHandler, TextInput } from "frog";
+import { Button, Env, FrameHandler } from "frog";
 import { Box } from "../ui";
 import { TreeBackground } from "./TreeBackground";
 import { PlainTree } from "./PlainTree";
 import { Ornament } from "./Ornament";
 import { BlankInput } from "hono/types";
+import PATH from "../routes/path";
 
 const TreeMain: FrameHandler<Env, "/", BlankInput> = (c) => {
-  const { status } = c;
+  const { status, req } = c;
+  const id = req.param("id");
+
+
   return c.res({
     imageAspectRatio: "1:1",
     image: (
@@ -32,11 +36,9 @@ const TreeMain: FrameHandler<Env, "/", BlankInput> = (c) => {
       </Box>
     ),
     intents: [
-      <TextInput placeholder="Enter custom fruit..." />,
-      <Button value="apples">Apples</Button>,
-      <Button value="oranges">Oranges</Button>,
-      <Button value="bananas">Bananas</Button>,
-      status === "response" && <Button.Reset>Reset</Button.Reset>,
+      <Button action={PATH.CREATE_TREE}>Create Tree</Button>,
+      <Button value="create">{id ?? "ID"}</Button>,
+
     ],
   });
 };

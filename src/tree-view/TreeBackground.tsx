@@ -14,7 +14,7 @@ export const TreeBackground = ({ no }: TreeBackgroundProps) => {
       left="0"
       right="0"
     >
-      <Image src={`/bg/bg-${no}.png`} width="100%" height="100%" />
+      {no && <Image src={`/bg/bg-${no}.png`} width="100%" height="100%" />}
     </Box>
   );
 };
