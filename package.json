@@ -3,8 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "typechain": "typechain --target ethers-v6 --out-dir src/typechain src/abi/*.json",
+    "build": "frog vercel-build",
     "dev": "frog dev",
-    "typechain": "typechain --target ethers-v6 --out-dir src/typechain src/abi/*.json"
+    "deploy": "vercel"
   },
   "dependencies": {
     "@hono/node-server": "latest",
@@ -15,6 +17,7 @@
     "typechain": "^8.3.2"
   },
   "devDependencies": {
-    "typescript": "latest"
+    "typescript": "latest",
+    "vercel": "^39.0.2"
   }
 }

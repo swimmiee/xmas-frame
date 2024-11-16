@@ -7,9 +7,6 @@ const AdornTx: TransactionHandler = (c) => {
   const ornId = c.req.param("ornId");
 
   if (isNaN(Number(treeId))) throw new Error("Errorneous Bg ID");
-
-  console.log(Number(treeId),
-  Number(ornId),)
   const data = XmasTree__factory.createInterface().encodeFunctionData("adorn", [
     Number(treeId),
     Number(ornId),

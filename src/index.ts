@@ -10,6 +10,8 @@ import DecorateTree from "./decorate";
 import HomePage from "./main";
 import DecorateConfirm from "./decorate/confirm";
 import AdornTx from "./decorate/adornTx";
+import { handle } from "frog/next";
+import { neynar } from "frog/hubs";
 
 export interface State {
   temp: string;
@@ -31,9 +33,11 @@ export interface State {
 export type EnvState = Env & { State: State };
 
 export const app = new Frog<{ State: State }>({
+  assetsPath: '/',
+  basePath: '/',
   // Supply a Hub to enable frame verification.
-  // hub: neynar({ apiKey: 'NEYNAR_FROG_FM' })
-  title: "XMAS Frame",
+  hub: neynar({ apiKey: "NEYNAR_FROG_FM" }),
+  title: "X-MAS Frame",
   ui: { vars },
   initialState: {
     temp: "",
@@ -66,4 +70,11 @@ app.frame(PATH.CREATE_TREE, CreateTree);
 app.transaction(PATH.CREATE_TREE_TX, CreateTx);
 app.transaction(PATH.DECORATE_TX, AdornTx);
 
-devtools(app, { serveStatic });
+// @ts-ignore
+const isEdgeFunction = typeof EdgeFunction !== 'undefined'
+// @ts-ignore
+const isProduction = isEdgeFunction || import.meta.env?.MODE !== 'development'
+devtools(app, isProduction ? { assetsPath: '/.frog' } : { serveStatic })
+
+export const GET = handle(app);
+export const POST = handle(app);

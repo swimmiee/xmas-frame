@@ -48,7 +48,7 @@ const DecorateConfirm: FrameHandler<
           <Image src={ornUri} width="72" height="72" />
           <Box flexDirection="row" gap="6">
             <Box
-              background="gray1000"
+              background={c.transactionId ? "xgreen" : "gray1000"}
               borderRadius="4"
               marginTop="2"
               width="14"
