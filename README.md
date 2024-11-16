@@ -1,6 +1,4 @@
-```
-npm install
-npm run dev
-```
+# X-Mas Frame
 
-Head to http://localhost:5173
+# Smart contracts
+https://github.com/swimmiee/xmas-contracts

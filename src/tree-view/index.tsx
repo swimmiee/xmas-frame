@@ -38,18 +38,7 @@ const TreeMain: FrameHandler<EnvState, "/", BlankInput> = async (c) => {
       >
         <TreeBackground no={Number(tree.bgId)} />
         <PlainTree />
-        {/* <Ornament position={0} itemId={1} />
-        <Ornament position={1} itemId={1} />
-        <Ornament position={2} itemId={1} />
-        <Ornament position={3} itemId={1} />
-        <Ornament position={4} itemId={1} />
-        <Ornament position={5} itemId={1} />
-        <Ornament position={6} itemId={1} />
-        <Ornament position={7} itemId={1} />
-        <Ornament position={8} itemId={1} />
-        <Ornament position={9} itemId={1} />
-        <Ornament position={10} itemId={1} />
-        <Ornament position={11} itemId={1} /> */}
+
         {tree.ornamentIds?.map((oId, i) => {
           return oId > 0 ? <Ornament position={i} itemId={oId} /> : null;
         })}
@@ -60,6 +49,7 @@ const TreeMain: FrameHandler<EnvState, "/", BlankInput> = async (c) => {
       <Button action={genPath(PATH.DECORATE, { id: treeId })}>
         Decorate Tree ⭐️
       </Button>,
+      <Button action={PATH.HOME}>🏠</Button>,
     ],
   });
 };

@@ -30,14 +30,14 @@ const DecorateConfirm: FrameHandler<
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        background="background"
+        background={c.transactionId ? "xgreen" : "background"}
         position="relative"
         padding="6"
         gap="6"
       >
         <Box
           display="flex"
-          background="background400"
+          background={"background400"}
           borderRadius="4"
           gap="16"
           width="160"
@@ -48,7 +48,7 @@ const DecorateConfirm: FrameHandler<
           <Image src={ornUri} width="72" height="72" />
           <Box flexDirection="row" gap="6">
             <Box
-              background={c.transactionId ? "xgreen" : "gray1000"}
+              background={"gray1000"}
               borderRadius="4"
               marginTop="2"
               width="14"
