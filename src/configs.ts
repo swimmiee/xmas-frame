@@ -13,8 +13,31 @@
 // Optimism Sepolia	eip155:11155420
 
 const Sepolia = "eip155:11155111" as const;
+const BaseSepolia = "eip155:84532" as const;
 
 export const CONFIGS = {
-  chainId: Sepolia,
-  bgCount: 1,
+  env: "base",
+  bgCount: 3,
+  ornCount: 12,
+  envs: {
+    sepolia: {
+      chainId: Sepolia,
+      rpcUrl: "https://rpc.sepolia.org",
+    },
+    base: {
+      chainId: BaseSepolia,
+      rpcUrl: "https://sepolia.base.org",
+      contracts: {
+        owner: "0x22E4Ee2e606716d9CCB0e987e77b3c9b10c8D45E",
+        tree: "0x4cBE57086251b5Af94AF65a045De63e3b2A26396",
+        XMAS: "0xDeCA3DcA1F1e75d6c5e8C57aF03B6AaD379229C2",
+        nft: "0xdEa7A0550528a163929840c2c810Da4F98933EEE",
+      },
+    },
+  },
+
+  orns: new Array(12).fill(0).map((_, i) => ({
+    priceUnit: 1 + (i % 3),
+    name: "O" + i,
+  })),
 } as const;

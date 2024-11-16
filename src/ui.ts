@@ -1,4 +1,4 @@
-import { colors, units, createSystem } from "frog/ui";
+import { colors, units, createSystem, defaultVars } from "frog/ui";
 
 export const {
   Box,
@@ -16,9 +16,21 @@ export const {
   VStack,
   vars,
 } = createSystem({
-  colors: colors.dark,
+  colors: {
+    ...colors.dark,
+    background300: "#242424",
+    background400: "#393939",
+    xred:"#d6001c",
+    xgreen:"#036f3e"
+  },
+  fontSizes: {
+    ...defaultVars.fontSizes,
+    "10": 10 / 630,
+  },
+
   units: {
     ...units,
+    "10": 10 / 630,
     "148": 149.5 / 630,
   },
 });

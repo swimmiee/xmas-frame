@@ -3,12 +3,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "frog dev"
+    "dev": "frog dev",
+    "typechain": "typechain --target ethers-v6 --out-dir src/typechain src/abi/*.json"
   },
   "dependencies": {
     "@hono/node-server": "latest",
+    "@typechain/ethers-v6": "^0.5.1",
+    "ethers": "^6.13.4",
     "frog": "latest",
-    "hono": "^4"
+    "hono": "^4",
+    "typechain": "^8.3.2"
   },
   "devDependencies": {
     "typescript": "latest"

@@ -4,23 +4,31 @@ import { BlankInput } from "hono/types";
 import { Box, Text } from "../ui";
 import { EnvState } from "..";
 import { CONFIGS } from "../configs";
-import { TreeBackground } from "../tree-view/TreeBackground";
-import { PlainTree } from "../tree-view/PlainTree";
+import { TreeSelector } from "./TreeSelector";
+import { genPath } from "../utils/genPath";
+import { getTree } from "../contracts/tree";
 
 const CreateTree: FrameHandler<
   EnvState,
   typeof PATH.CREATE_TREE,
   BlankInput
-> = (c) => {
-  const { buttonValue, previousState, status } = c;
-  const { create } = c.deriveState((prev) => {
-    if (buttonValue === "left") {
+> = async (c) => {
+  const { buttonValue, deriveState } = c;
+  const { create } = await deriveState(async (prev) => {
+    prev.create.nextTreeId = Number(await getTree().nextTreeId());
+    if (buttonValue === "l") {
       prev.create.bgId = Math.max(prev.create.bgId - 1, 0);
     }
-    if (buttonValue === "right") {
+    if (buttonValue === "r") {
       prev.create.bgId = Math.min(prev.create.bgId + 1, CONFIGS.bgCount);
     }
   });
+
+  const host =
+    typeof window !== "undefined"
+      ? window.location.origin
+      : "http://localhost:5173";
+  const postUrl = `${host}${genPath(PATH.TREE_HOME, { id: 1 })}`;
 
   return c.res({
     imageAspectRatio: "1:1",
@@ -30,18 +38,42 @@ const CreateTree: FrameHandler<
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        background="text400"
+        background="xgreen"
         position="relative"
       >
-        <TreeBackground no={create.bgId} />
-        <PlainTree />
+        <TreeSelector no={create.bgId} />
+        <Box position="absolute" top="36" fontWeight="700">
+          <Text color="text" size="20">
+            Create My Tree 🎄
+          </Text>
+        </Box>
+        <Box position="absolute" bottom="16" fontWeight="700">
+          <Text color="text" size="16">
+            {create.bgId + 1} / {CONFIGS.bgCount + 1}
+          </Text>
+        </Box>
       </Box>
     ),
-    intents: [
-      <Button value="left">{"<"}</Button>,
-      <Button.Signature target="">OK</Button.Signature>,
-      <Button value="right">{">"}</Button>,
-    ],
+    intents: c.transactionId
+      ? [
+          <Button.Link href={`https://warpcast.com/~/compose?text=${postUrl}`}>
+            Post
+          </Button.Link>,
+          <Button action={genPath(PATH.TREE_HOME, { id: create.nextTreeId })}>
+            View My Tree 🎄
+          </Button>,
+        ]
+      : [
+          <Button value="l">⬅️</Button>,
+          //   <Button.Signature target={"/create/tx/" + create.bgId}>
+          <Button.Transaction
+            target={genPath(PATH.CREATE_TREE_TX, { bgId: create.bgId })}
+          >
+            Create
+          </Button.Transaction>,
+          <Button value="r">➡️</Button>,
+          <Button action={PATH.HOME}>🏠</Button>,
+        ],
   });
 };
 
