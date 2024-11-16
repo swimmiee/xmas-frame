@@ -18,7 +18,7 @@ const BaseSepolia = "eip155:84532" as const;
 export const CONFIGS = {
   env: "base",
   bgCount: 3,
-  ornCount: 12,
+  ornCount: 18,
   envs: {
     sepolia: {
       chainId: Sepolia,
@@ -28,15 +28,15 @@ export const CONFIGS = {
       chainId: BaseSepolia,
       rpcUrl: "https://sepolia.base.org",
       contracts: {
-        owner: "0x22E4Ee2e606716d9CCB0e987e77b3c9b10c8D45E",
-        tree: "0x4cBE57086251b5Af94AF65a045De63e3b2A26396",
-        XMAS: "0xDeCA3DcA1F1e75d6c5e8C57aF03B6AaD379229C2",
-        nft: "0xdEa7A0550528a163929840c2c810Da4F98933EEE",
-      },
+        owner: '0x22E4Ee2e606716d9CCB0e987e77b3c9b10c8D45E',
+        tree: '0x7141A97ca4ECEb87550f828108E1852cC3BD6f04',
+        XMAS: '0x26Da6a798BCC4595eAA46f7c17295384f56725d1',
+        nft: '0x54F52bE0AE22e5Cc4a3B87C4992ba50e842df990'
+      }
     },
   },
 
-  orns: new Array(12).fill(0).map((_, i) => ({
+  orns: new Array(18).fill(0).map((_, i) => ({
     priceUnit: 1 + (i % 3),
     name: "O" + i,
   })),

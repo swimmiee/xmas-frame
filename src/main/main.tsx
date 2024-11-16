@@ -1,9 +1,9 @@
+import PATH from "../routes/path";
 import { Button, FrameHandler } from "frog";
-import { EnvState } from ".";
-import PATH from "./routes/path";
+import { EnvState } from "..";
 import { BlankInput } from "hono/types";
-import { Image } from "./ui";
-import { genPath } from "./utils/genPath";
+import { Image } from "../ui";
+import { genPath } from "../utils/genPath";
 
 const HomePage: FrameHandler<EnvState, typeof PATH.HOME, BlankInput> = async (
   c
