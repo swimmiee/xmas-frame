@@ -1,8 +1,8 @@
-import { Button, FrameHandler, TextInput } from "frog";
 import PATH from "../routes/path.js";
+import { Button, FrameHandler, TextInput } from "frog";
 import { EnvState } from "../../api";
 import { BlankInput } from "hono/types";
-import { Box } from "../ui.js";
+import { Box, Image } from "../ui.js";
 import { genPath } from "../utils/genPath.js";
 import { DecoColItem } from "./DecorateColItem.js";
 import { getTree } from "../contracts/tree.js";
@@ -53,11 +53,13 @@ const DecorateTree: FrameHandler<
         flexDirection="row"
         alignItems="center"
         justifyContent="center"
-        background="background"
         position="relative"
         padding="6"
         gap="6"
       >
+        <Box position="absolute" top="0" bottom="0" left="0" right="0">
+          <Image src="/static/decorate-bg.png" />
+        </Box>
         <Box flexDirection="column" gap="6">
           {decorate.ornPrices &&
             orns.slice(0, PAGE_COUNT / 2).map((o) => {

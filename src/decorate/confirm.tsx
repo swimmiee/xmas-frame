@@ -24,7 +24,6 @@ const DecorateConfirm: FrameHandler<
     prev.decorate.currOrnPrice = ornPrice.toString();
   });
   const ornUri = `/static/ornaments/${ornId}.png`;
-  console.log(treeId, ornId, ornPrice);
 
   return c.res({
     imageAspectRatio: "1:1",
@@ -34,44 +33,53 @@ const DecorateConfirm: FrameHandler<
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        background={c.transactionId ? "xgreen" : "background"}
         position="relative"
-        padding="6"
-        gap="6"
       >
+        <Image
+          src={
+            c.transactionId
+              ? "/static/decorate-done.png"
+              : "/static/decorate-confirm-bg.png"
+          }
+          height="100%"
+        />
         <Box
-          display="flex"
-          background={"background400"}
-          borderRadius="4"
-          gap="16"
-          width="108"
-          height="108"
+          flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          marginBottom="16"
+          position="absolute"
         >
-          <Image src={ornUri} width="48" height="48" />
-          <Box flexDirection="row" gap="6">
-            <Box
-              background={"gray1000"}
-              borderRadius="4"
-              marginTop="2"
-              width="12"
-              height="12"
-              paddingTop="1"
-              paddingLeft="1"
-            >
-              <Text color="background" align="center" size="8">
-                {String(ornId)}
+          <Box
+            display="flex"
+            borderRadius="4"
+            gap="12"
+            width="128"
+            height="128"
+            alignItems="center"
+            justifyContent="center"
+            marginBottom="72"
+          >
+            <Image src={ornUri} width="64" height="64" />
+            <Box flexDirection="row" gap="6">
+              <Box
+                background={"gray1000"}
+                borderRadius="4"
+                marginTop="2"
+                width="14"
+                height="14"
+                paddingTop="1"
+                paddingLeft="1"
+              >
+                <Text color="background" align="center" size="10">
+                  {String(ornId)}
+                </Text>
+              </Box>
+              <Text color="text" align="center" size="16">
+                {+formatEther(ornPrice)} XMAS
               </Text>
             </Box>
-            <Text color="text" align="center" size="14">
-              {+formatEther(ornPrice)} XMAS
-            </Text>
           </Box>
         </Box>
-
-        <Text>{c.transactionId ? "Done!" : "Decorate Now!"}</Text>
       </Box>
     ),
     intents: c.transactionId

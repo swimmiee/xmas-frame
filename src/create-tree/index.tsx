@@ -78,9 +78,17 @@ const CreateTree: FrameHandler<
             {create.bgId} / {create.bgCount}
           </Text>
           {create.bgPrices && (
-            <Text color="text" size="14">
-              Price: {create.bgPrices![create.bgId - 1]} XMAS
-            </Text>
+            <Box flexDirection="row" gap="3">
+              <Text color="text" size="14">
+                Price:
+              </Text>
+              <Text color="yellow" size="14">
+                {create.bgPrices![create.bgId - 1]}
+              </Text>
+              <Text color="text" size="14">
+                XMAS
+              </Text>
+            </Box>
           )}
         </Box>
       </Box>

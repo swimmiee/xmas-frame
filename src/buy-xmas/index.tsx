@@ -1,7 +1,7 @@
-import PATH from "../routes/path.js";
 import { Button, FrameHandler, TextInput } from "frog";
+import PATH from "../routes/path.js";
 import { BlankInput } from "hono/types";
-import { Box, Text } from "../ui.js";
+import { Box, Text, Image } from "../ui.js";
 import { EnvState } from "../../api";
 import { formatEther, parseEther } from "ethers";
 import { getUniRouter } from "../contracts/UniRouter.js";
@@ -55,42 +55,71 @@ const BuyXMAS: FrameHandler<
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        background={c.transactionId ? "xgreen" : "xblue"}
         position="relative"
       >
         {c.transactionId ? (
-          <Box position="absolute" top="36" fontWeight="700">
-            <Text color="text" size="24">
-              Got {buyXMAS.swappedAmount} XMAS!
-            </Text>
-          </Box>
+          <>
+            <Box position="absolute" top="0" bottom="0" left="0" right="0">
+              <Image src="/static/got-xmas.png" />
+            </Box>
+            <Box gap="8" position="absolute" flexDirection="row" bottom="80">
+              <Text color="text" size="48">
+                Got
+              </Text>
+              <Text color="yellow" size="48">
+                {buyXMAS.swappedAmount}
+              </Text>
+              <Text color="text" size="48">
+                {" "}
+                XMAS!
+              </Text>
+            </Box>
+          </>
         ) : (
           <>
-            <Box position="absolute" top="36" fontWeight="700">
-              <Text color="text" size="24">
-                Buy $XMAS
-              </Text>
+            <Box position="absolute" top="0" bottom="0" left="0" right="0">
+              <Image src="/static/buy-xmas.png" />
             </Box>
 
             <Box
               position="absolute"
-              bottom="16"
+              bottom="40"
               fontWeight="700"
               flexDirection="column"
               alignItems="center"
             >
-              <Text align="center" color="text" size="24">
-                {buyXMAS.reserve} XMAS in the pool
-              </Text>
-              <Text align="center" color="text" size="24">
-                10 XMAS = {buyXMAS.price10} ETH
-              </Text>
-              <Text align="center" color="text" size="24">
-                100 XMAS = {buyXMAS.price100} ETH
-              </Text>
-              <Text align="center" color="text" size="24">
-                1000 XMAS = {buyXMAS.price1000} ETH
-              </Text>
+              <Box flexDirection="row" gap="4" marginBottom="2">
+                <Text weight="600" align="center" color="yellow" size="24">
+                  {buyXMAS.reserve} XMAS
+                </Text>
+                <Text align="center" color="text" size="24">
+                  in the pool
+                </Text>
+              </Box>
+              <Box flexDirection="row" gap="4">
+                <Text weight="600" align="center" color="yellow" size="20">
+                  10 XMAS
+                </Text>
+                <Text align="center" color="text" size="20">
+                  = {buyXMAS.price10} ETH
+                </Text>
+              </Box>
+              <Box flexDirection="row" gap="4">
+                <Text weight="600" align="center" color="yellow" size="20">
+                  100 XMAS
+                </Text>
+                <Text align="center" color="text" size="20">
+                  = {buyXMAS.price100} ETH
+                </Text>
+              </Box>
+              <Box flexDirection="row" gap="4">
+                <Text weight="600" align="center" color="yellow" size="20">
+                  1000 XMAS
+                </Text>
+                <Text align="center" color="text" size="20">
+                  = {buyXMAS.price1000} ETH
+                </Text>
+              </Box>
             </Box>
           </>
         )}
