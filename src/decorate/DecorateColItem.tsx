@@ -11,7 +11,7 @@ export const DecoColItem = ({ index, uri, price }: DecoColItem) => {
       key={index}
       display="flex"
       flexDirection="column"
-      background="background400"
+      background="darkred"
       borderRadius="4"
       gap="8"
       width="128"
@@ -26,12 +26,13 @@ export const DecoColItem = ({ index, uri, price }: DecoColItem) => {
         justifyContent="center"
       >
         <Box
+          alignItems="center"
+          justifyContent="center"
           background="gray1000"
           borderRadius="4"
           width="14"
           height="14"
           paddingTop="1"
-          paddingLeft="1"
         >
           <Text color="background" align="center" size="10">
             {String(index)}
