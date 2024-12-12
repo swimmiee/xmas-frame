@@ -1,7 +1,7 @@
 import { parseEther, TransactionHandler } from "frog";
-import { CONFIGS } from "../configs";
-import { UniRouter__factory } from "../typechain";
-import { getUniRouter } from "../contracts/UniRouter";
+import { CONFIGS } from "../configs.js";
+import { UniRouter__factory } from "../typechain/index.js";
+import { getUniRouter } from "../contracts/UniRouter.js";
 import { MaxUint256 } from "ethers";
 
 const BuyXMASTx: TransactionHandler = async (c) => {

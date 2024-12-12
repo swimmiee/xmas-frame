@@ -1,4 +1,4 @@
-import { Box, Image } from "../ui";
+import { Box, Image } from "../ui.js";
 
 interface TreeBackgroundProps {
   no: number;
@@ -12,7 +12,7 @@ export const TreeBackground = ({ no }: TreeBackgroundProps) => {
       alignItems="center"
       justifyContent="center"
     >
-      {no && <Image src={`/bg/bg-${no}.png`} height="100%" />}
+      {no && <Image src={`/static/bg/bg-${no}.png`} height="100%" />}
     </Box>
   );
 };

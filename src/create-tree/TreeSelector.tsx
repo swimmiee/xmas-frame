@@ -1,4 +1,4 @@
-import { Box, Image } from "../ui";
+import { Box, Image } from "../ui.js";
 
 interface TreeSelectorProps {
   no: number;
@@ -19,9 +19,9 @@ export const TreeSelector = ({ no }: TreeSelectorProps) => {
         background="background200"
       >
         <Box position="absolute" top="0" bottom="0" left="0" right="0">
-          <Image borderRadius="16" src={`/bg/bg-${no}.png`} />
+          <Image borderRadius="16" src={`/static/bg/bg-${no}.png`} />
         </Box>
-        <Image src="/tree.png" height="100%" />
+        <Image src="/static/tree.png" height="100%" />
       </Box>
     </Box>
   );

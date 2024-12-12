@@ -1,10 +1,10 @@
 import { Button, FrameHandler } from "frog";
-import { EnvState } from "..";
-import PATH from "../routes/path";
+import { EnvState } from "../../api";
+import PATH from "../routes/path.js";
 import { BlankInput } from "hono/types";
-import { Box, Image, Text } from "../ui";
-import { genPath } from "../utils/genPath";
-import { getTree } from "../contracts/tree";
+import { Box, Image, Text } from "../ui.js";
+import { genPath } from "../utils/genPath.js";
+import { getTree } from "../contracts/tree.js";
 import { formatEther } from "ethers";
 
 const DecorateConfirm: FrameHandler<
@@ -23,7 +23,7 @@ const DecorateConfirm: FrameHandler<
     const ornPrice = await getTree().ornamentPrices(prev.decorate.currOrnId);
     prev.decorate.currOrnPrice = ornPrice.toString();
   });
-  const ornUri = `/ornaments/${ornId}.png`;
+  const ornUri = `/static/ornaments/${ornId}.png`;
   console.log(treeId, ornId, ornPrice);
 
   return c.res({

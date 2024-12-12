@@ -1,4 +1,4 @@
-import { Box, Image, Text } from "../ui";
+import { Box, Image, Text } from "../ui.js";
 
 interface DecoColItem {
   index: number;

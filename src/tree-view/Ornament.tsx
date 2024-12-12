@@ -1,4 +1,4 @@
-import { Image } from "../ui";
+import { Image } from "../ui.js";
 
 interface OrnamentProps {
   position: number;
@@ -33,7 +33,7 @@ export const Ornament = ({ position, itemId }: OrnamentProps) => {
         height: SIZE,
       }}
     >
-      <Image src={`/ornaments/${itemId}.png`} width="100%" height="100%" />
+      <Image src={`/static/ornaments/${itemId}.png`} width="100%" height="100%" />
     </div>
   );
 };

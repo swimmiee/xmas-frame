@@ -1,13 +1,13 @@
-import PATH from "../routes/path";
+import PATH from "../routes/path.js";
 import { Button, FrameHandler } from "frog";
 import { BlankInput } from "hono/types";
-import { Box, Text } from "../ui";
-import { EnvState } from "..";
-import { TreeSelector } from "./TreeSelector";
-import { genPath } from "../utils/genPath";
-import { getTree } from "../contracts/tree";
+import { Box, Text } from "../ui.js";
+import { EnvState } from "../../api";
+import { TreeSelector } from "./TreeSelector.js";
+import { genPath } from "../utils/genPath.js";
+import { getTree } from "../contracts/tree.js";
 import { formatEther } from "ethers";
-import { getXMAS } from "../contracts/XMAS";
+import { getXMAS } from "../contracts/XMAS.js";
 
 const CreateTree: FrameHandler<
   EnvState,
