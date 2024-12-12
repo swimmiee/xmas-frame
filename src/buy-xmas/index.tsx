@@ -1,13 +1,13 @@
-import PATH from "../routes/path";
 import { Button, FrameHandler, TextInput } from "frog";
+import PATH from "../routes/path.js";
 import { BlankInput } from "hono/types";
-import { Box, Text, Image } from "../ui";
-import { EnvState } from "..";
+import { Box, Text, Image } from "../ui.js";
+import { EnvState } from "../../api";
 import { formatEther, parseEther } from "ethers";
-import { getUniRouter } from "../contracts/UniRouter";
-import { CONFIGS } from "../configs";
-import { getXMAS } from "../contracts/XMAS";
-import { provider } from "../contracts/provider";
+import { getUniRouter } from "../contracts/UniRouter.js";
+import { CONFIGS } from "../configs.js";
+import { getXMAS } from "../contracts/XMAS.js";
+import { provider } from "../contracts/provider.js";
 
 const BuyXMAS: FrameHandler<
   EnvState,
@@ -60,7 +60,7 @@ const BuyXMAS: FrameHandler<
         {c.transactionId ? (
           <>
             <Box position="absolute" top="0" bottom="0" left="0" right="0">
-              <Image src="/got-xmas.png" />
+              <Image src="/static/got-xmas.png" />
             </Box>
             <Box gap="8" position="absolute" flexDirection="row" bottom="80">
               <Text color="text" size="48">
@@ -78,7 +78,7 @@ const BuyXMAS: FrameHandler<
         ) : (
           <>
             <Box position="absolute" top="0" bottom="0" left="0" right="0">
-              <Image src="/buy-xmas.png" />
+              <Image src="/static/buy-xmas.png" />
             </Box>
 
             <Box

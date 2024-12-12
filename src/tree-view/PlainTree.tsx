@@ -1,4 +1,4 @@
-import { Box, Image } from "../ui";
+import { Box, Image } from "../ui.js";
 export const PlainTree = () => {
   return (
     <Box
@@ -11,7 +11,7 @@ export const PlainTree = () => {
       right="0"
       width="100%"
     >
-      <Image src="/tree.png" height="100%" />
+      <Image src="/static/tree.png" height="100%" />
     </Box>
   );
 };

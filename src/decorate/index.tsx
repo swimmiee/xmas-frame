@@ -1,11 +1,11 @@
+import PATH from "../routes/path.js";
 import { Button, FrameHandler, TextInput } from "frog";
-import PATH from "../routes/path";
-import { EnvState } from "..";
+import { EnvState } from "../../api";
 import { BlankInput } from "hono/types";
-import { Box, Image } from "../ui";
-import { genPath } from "../utils/genPath";
-import { DecoColItem } from "./DecorateColItem";
-import { getTree } from "../contracts/tree";
+import { Box, Image } from "../ui.js";
+import { genPath } from "../utils/genPath.js";
+import { DecoColItem } from "./DecorateColItem.js";
+import { getTree } from "../contracts/tree.js";
 import { formatEther } from "ethers";
 
 const DecorateTree: FrameHandler<
@@ -39,7 +39,7 @@ const DecorateTree: FrameHandler<
   const orns = new Array(count).fill(0).map((_, i) => {
     return {
       index: ornIdStart + i,
-      uri: `/ornaments/${ornIdStart + i}.png`,
+      uri: `/static/ornaments/${ornIdStart + i}.png`,
     };
   });
 
@@ -58,7 +58,7 @@ const DecorateTree: FrameHandler<
         gap="6"
       >
         <Box position="absolute" top="0" bottom="0" left="0" right="0">
-          <Image src="/decorate-bg.png" />
+          <Image src="/static/decorate-bg.png" />
         </Box>
         <Box flexDirection="column" gap="6">
           {decorate.ornPrices &&
