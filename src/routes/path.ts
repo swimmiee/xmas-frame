@@ -6,7 +6,10 @@ const PATH = {
 
   CREATE_TREE: "/create",
   CREATE_TREE_TX: "/create/tx/:bgId",
-  DECORATE_TX: "/tree/:id/decorate/:ornId/tx"
+  DECORATE_TX: "/tree/:id/decorate/:ornId/tx",
+  
+  BUY_XMAS: "/buy/xmas",
+  BUY_XMAS_TX: "/buy/xmas/tx",
 } as const;
 
 export default PATH;

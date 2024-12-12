@@ -1,10 +1,10 @@
 import { CONFIGS } from "../configs";
-import { JsonRpcProvider } from "ethers";
-import { XmasTree__factory } from "../typechain";
+import { XmasTree, XmasTree__factory } from "../typechain";
+import { provider } from "./provider";
 
-export const getTree = () => {
+export const getTree = (): XmasTree => {
   return XmasTree__factory.connect(
-    CONFIGS.envs[CONFIGS.env].contracts.tree,
-    new JsonRpcProvider(CONFIGS.envs[CONFIGS.env].rpcUrl)
+    CONFIGS.envs[CONFIGS.env].contracts.XmasTree,
+    provider()
   );
 };

@@ -25,6 +25,7 @@ const TreeMain: FrameHandler<EnvState, "/", BlankInput> = async (c) => {
     prev.tree.minted = tree.minted;
   });
 
+
   return c.res({
     imageAspectRatio: "1:1",
     image: (
@@ -33,7 +34,7 @@ const TreeMain: FrameHandler<EnvState, "/", BlankInput> = async (c) => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        background="background200"
+        background="text"
         position="relative"
       >
         <TreeBackground no={Number(tree.bgId)} />

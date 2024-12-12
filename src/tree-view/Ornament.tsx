@@ -5,21 +5,21 @@ interface OrnamentProps {
   itemId: number;
 }
 const POSITIONS = [
-  [485, 730],
-  [480, 615],
-  [450, 490],
-  [380, 695],
-  [390, 600],
-  [350, 515],
-  [290, 680],
-  [275, 600],
-  [240, 520],
-  [180, 650],
-  [160, 570],
-  [70, 600],
+  [512, 755],
+  [505, 660],
+  [480, 560],
+  [440, 475],
+  [395, 735],
+  [360, 660],
+  [335, 565],
+  [245, 500],
+  [205, 600],
+  [130, 680],
+  [130, 520],
+  [60, 600],
 ];
 
-const SIZE = 76;
+const SIZE = 80;
 export const Ornament = ({ position, itemId }: OrnamentProps) => {
   const [top, left] = POSITIONS[position];
   return (

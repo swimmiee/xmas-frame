@@ -1,37 +1,5 @@
 [
   {
-    "inputs": [],
-    "name": "InvalidInitialization",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "NotInitializing",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "owner",
-        "type": "address"
-      }
-    ],
-    "name": "OwnableInvalidOwner",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "account",
-        "type": "address"
-      }
-    ],
-    "name": "OwnableUnauthorizedAccount",
-    "type": "error"
-  },
-  {
     "anonymous": false,
     "inputs": [
       {
@@ -72,19 +40,6 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "uint64",
-        "name": "version",
-        "type": "uint64"
-      }
-    ],
-    "name": "Initialized",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
         "indexed": true,
         "internalType": "address",
         "name": "previousOwner",
@@ -114,59 +69,16 @@
         "internalType": "uint256",
         "name": "treeId",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "bgId",
+        "type": "uint32"
       }
     ],
     "name": "TreeCreated",
     "type": "event"
-  },
-  {
-    "inputs": [],
-    "name": "XMAS",
-    "outputs": [
-      {
-        "internalType": "contract IXMAS",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "XmasNFT",
-    "outputs": [
-      {
-        "internalType": "contract IXmasNFT",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "owner_",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "XMAS_",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "XmasNFT_",
-        "type": "address"
-      }
-    ],
-    "name": "__XmasTree_init",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
   },
   {
     "inputs": [
@@ -183,7 +95,133 @@
     ],
     "name": "adorn",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "allBgPrices",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "prices",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "allOrnamentPrices",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "prices",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "backgroundBaseURI",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "bgId",
+        "type": "uint256"
+      }
+    ],
+    "name": "backgroundURI",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "bgIds",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "prices",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "batchSetBackgroundPrices",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "ornamentIds",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "prices",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "batchSetOrnamentPrices",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "bgCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "bgPrices",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -196,7 +234,7 @@
     ],
     "name": "createTree",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -243,8 +281,47 @@
           }
         ],
         "internalType": "struct IXmasTree.Tree",
-        "name": "tree",
+        "name": "",
         "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "nextTreeId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ornamentBaseURI",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ornamentCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -254,18 +331,73 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "treeId",
+        "name": "",
         "type": "uint256"
       }
     ],
-    "name": "mint",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "name": "ornamentPrices",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "nextTreeId",
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "ornamentId",
+        "type": "uint256"
+      }
+    ],
+    "name": "ornamentURI",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
+      }
+    ],
+    "name": "ownedTreeAt",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "ownedTreeCount",
     "outputs": [
       {
         "internalType": "uint256",
@@ -314,26 +446,8 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "priceUnit",
-            "type": "uint256"
-          },
-          {
-            "internalType": "string",
-            "name": "uri",
-            "type": "string"
-          }
-        ],
-        "internalType": "struct IXmasTree.Background[]",
-        "name": "bgs",
-        "type": "tuple[]"
-      }
-    ],
-    "name": "registerBackground",
+    "inputs": [],
+    "name": "renounceOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -342,58 +456,16 @@
     "inputs": [
       {
         "internalType": "string",
-        "name": "name",
+        "name": "backgroundBaseURI_",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "uri",
+        "name": "ornamentBaseURI_",
         "type": "string"
       }
     ],
-    "name": "registerOrnament",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "owner",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "priceUnit",
-            "type": "uint256"
-          },
-          {
-            "internalType": "string",
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "uri",
-            "type": "string"
-          }
-        ],
-        "internalType": "struct IXmasTree.Ornament[]",
-        "name": "os",
-        "type": "tuple[]"
-      }
-    ],
-    "name": "registerOrnaments",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "renounceOwnership",
+    "name": "setBaseURIs",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -414,22 +486,24 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      },
-      {
         "internalType": "address",
-        "name": "",
+        "name": "to",
         "type": "address"
       }
     ],
-    "name": "userAdorned",
+    "name": "withdraw",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "xmas",
     "outputs": [
       {
-        "internalType": "bool",
+        "internalType": "contract XMAS",
         "name": "",
-        "type": "bool"
+        "type": "address"
       }
     ],
     "stateMutability": "view",

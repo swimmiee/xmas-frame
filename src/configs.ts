@@ -16,9 +16,7 @@ const Sepolia = "eip155:11155111" as const;
 const BaseSepolia = "eip155:84532" as const;
 
 export const CONFIGS = {
-  env: "base",
-  bgCount: 3,
-  ornCount: 18,
+  env: "baseSepolia",
   envs: {
     sepolia: {
       chainId: Sepolia,
@@ -29,25 +27,22 @@ export const CONFIGS = {
       rpcUrl: "https://polygon.llamarpc.com",
       contracts: {
         owner: "0x22E4Ee2e606716d9CCB0e987e77b3c9b10c8D45E",
-        tree: "0xeD308f47A6246E90BE419b318F46aB32b31182Da",
+        XmasTree: "0xeD308f47A6246E90BE419b318F46aB32b31182Da",
         XMAS: "0xe8FFD02481D94E01d65DbF0887180637186944A5",
-        nft: "0x77DA77d38d9263fC0b0830b2BBd46f8f18674d95",
       },
     },
-    base: {
+    baseSepolia: {
       chainId: BaseSepolia,
       rpcUrl: "https://sepolia.base.org",
       contracts: {
+        XmasTree: "0x52d34B628264a6e06Ce7788a0166e7e266947558",
+        XMAS: "0x946008428443a60b9142cBF2F3570DcB5bFcCff3",
         owner: "0x22E4Ee2e606716d9CCB0e987e77b3c9b10c8D45E",
-        tree: "0x7141A97ca4ECEb87550f828108E1852cC3BD6f04",
-        XMAS: "0x26Da6a798BCC4595eAA46f7c17295384f56725d1",
-        nft: "0x54F52bE0AE22e5Cc4a3B87C4992ba50e842df990",
+        pair: "0xAFdfD52292D35Fd7BC8f8059128a591057Bc38a4",
+        factory: "0x7Ae58f10f7849cA6F5fB71b7f45CB416c9204b1e",
+        router: "0x1689E7B1F10000AE47eBfE339a4f69dECd19F602",
+        WETH: "0x4200000000000000000000000000000000000006",
       },
     },
   },
-
-  orns: new Array(18).fill(0).map((_, i) => ({
-    priceUnit: 1 + (i % 3),
-    name: "O" + i,
-  })),
 } as const;

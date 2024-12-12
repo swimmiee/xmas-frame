@@ -6,15 +6,13 @@ interface TreeBackgroundProps {
 export const TreeBackground = ({ no }: TreeBackgroundProps) => {
   return (
     <Box
-      position="absolute"
       width="100%"
       height="100%"
-      top="0"
-      bottom="0"
-      left="0"
-      right="0"
+      position="absolute"
+      alignItems="center"
+      justifyContent="center"
     >
-      {no && <Image src={`/bg/bg-${no}.png`} width="100%" height="100%" />}
+      {no && <Image src={`/bg/bg-${no}.png`} height="100%" />}
     </Box>
   );
 };

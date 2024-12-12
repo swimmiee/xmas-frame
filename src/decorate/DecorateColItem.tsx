@@ -2,10 +2,10 @@ import { Box, Image, Text } from "../ui";
 
 interface DecoColItem {
   index: number;
-  priceUnit: number;
   uri: string;
+  price: string;
 }
-export const DecoColItem = ({ index, uri, priceUnit }: DecoColItem) => {
+export const DecoColItem = ({ index, uri, price }: DecoColItem) => {
   return (
     <Box
       key={index}
@@ -18,11 +18,6 @@ export const DecoColItem = ({ index, uri, priceUnit }: DecoColItem) => {
       padding="10"
       alignItems="center"
     >
-      {/* <Box alignItems="center" justifyContent="center" margin="4">
-        <Text color="text" align="center" size="12">
-          {String(index)}
-        </Text>
-      </Box> */}
       <Image src={uri} width="36" height="36" />
       <Box
         flexDirection="row"
@@ -44,7 +39,7 @@ export const DecoColItem = ({ index, uri, priceUnit }: DecoColItem) => {
         </Box>
         <Box marginTop="2">
           <Text color="text" align="center" size="12">
-            {String(priceUnit * 0.005)} ETH
+            {+price} XMAS
           </Text>
         </Box>
       </Box>
