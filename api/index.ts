@@ -1,18 +1,18 @@
 import { serveStatic } from "@hono/node-server/serve-static";
 import { Env, Frog } from "frog";
-import { vars } from "./ui";
+import { vars } from "../src/ui.ts";
 import { devtools } from "frog/dev";
-import TreeMain from "./tree-view";
-import CreateTree from "./create-tree";
-import PATH from "./routes/path";
-import CreateTx from "./create-tree/createTx";
-import DecorateTree from "./decorate";
-import HomePage from "./main/main";
-import DecorateConfirm from "./decorate/confirm";
-import AdornTx from "./decorate/adornTx";
+import TreeMain from "../src/tree-view";
+import CreateTree from "../src/create-tree";
+import PATH from "../src/routes/path.ts";
+import CreateTx from "../src/create-tree/createTx.ts";
+import DecorateTree from "../src/decorate";
+import HomePage from "../src/main/main.tsx";
+import DecorateConfirm from "../src/decorate/confirm.tsx";
+import AdornTx from "../src/decorate/adornTx.ts";
 import { handle } from "frog/next";
-import BuyXMAS from "./buy-xmas";
-import BuyXMASTx from "./decorate/buyXMAStx";
+import BuyXMAS from "../src/buy-xmas";
+import BuyXMASTx from "../src/decorate/buyXMAStx.ts";
 import { createNeynar } from "frog/middlewares";
 
 export interface State {
@@ -53,7 +53,7 @@ export type EnvState = Env & { State: State };
 const neynar = createNeynar({ apiKey: "NEYNAR_FROG_FM" });
 export const app = new Frog<{ State: State }>({
   basePath: "/",
-  browserLocation: "/:path",
+  // browserLocation: "/:path",
   hub: neynar.hub(),
   title: "X-MAS Frame",
   ui: { vars },
