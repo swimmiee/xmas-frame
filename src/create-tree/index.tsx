@@ -7,7 +7,8 @@ import { TreeSelector } from "./TreeSelector.js";
 import { genPath } from "../utils/genPath.js";
 import { getTree } from "../contracts/tree.js";
 import { formatEther } from "ethers";
-// import { getXMAS } from "../contracts/XMAS.js";
+import { provider } from "../contracts/provider.js";
+import { getXMAS } from "../contracts/XMAS.js";
 
 const CreateTree: FrameHandler<
   EnvState,
@@ -20,10 +21,18 @@ const CreateTree: FrameHandler<
     const bgCount = Number(await tree.bgCount());
     const bgPrices = await tree.allBgPrices();
 
-    prev.create.nextTreeId = Number(await tree.nextTreeId());
     if (c.transactionId) {
-      prev.create.nextTreeId = prev.create.nextTreeId - 1;
+      // prev.create.nextTreeId = prev.create.nextTreeId - 1;
+      const prv = provider();
+      const r = await prv.getTransactionReceipt(c.transactionId);
+      const createdTreeId = Number(
+        BigInt(r?.logs[r.logs.length - 1].topics[2] ?? "0x0")
+      );
+      prev.create.createdTreeId = createdTreeId;
+    } else {
+      prev.create.nextTreeId = Number(await tree.nextTreeId());
     }
+
     prev.create.bgPrices = bgPrices.map((p) => String(+formatEther(p)));
     prev.create.bgCount = bgCount;
     if (buttonValue === "l") {
@@ -33,20 +42,23 @@ const CreateTree: FrameHandler<
       prev.create.bgId = Math.min(prev.create.bgId + 1, bgCount);
     }
 
-    // // @ts-ignore
-    // const userAddress = c.var.interactor.custodyAddress;
-    // prev.create.xmasBalance = await getXMAS()
-    //   .balanceOf(userAddress)
-    //   .then((balance) => formatEther(balance));
+    // @ts-ignore
+    if (!c?.var?.interactor?.custodyAddress) return;
+    // @ts-ignore
+    const userAddress = c.var!.interactor!.custodyAddress;
+    prev.create.xmasBalance = await getXMAS()
+      .balanceOf(userAddress)
+      .then((balance) => formatEther(balance));
   });
 
   const host =
     typeof window !== "undefined"
       ? window.location.origin
-      : "http://localhost:5173";
+      : "https://xmas-tree-pi.vercel.app";
   const postUrl = `${host}${genPath(PATH.TREE_HOME, {
-    id: create.nextTreeId,
+    id: create.createdTreeId,
   })}`;
+  const href = `https://warpcast.com/~/compose?text=${postUrl}`;
 
   return c.res({
     imageAspectRatio: "1:1",
@@ -95,9 +107,7 @@ const CreateTree: FrameHandler<
     ),
     intents: c.transactionId
       ? [
-          <Button.Link href={`https://warpcast.com/~/compose?text=${postUrl}`}>
-            Post
-          </Button.Link>,
+          <Button.Link href={href}>Post</Button.Link>,
           <Button action={genPath(PATH.TREE_HOME, { id: create.nextTreeId })}>
             View My Tree 🎄
           </Button>,

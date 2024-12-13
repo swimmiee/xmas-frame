@@ -42,8 +42,6 @@ const DecorateTree: FrameHandler<
     };
   });
 
-  // const ornsInfo =
-
   return c.res({
     imageAspectRatio: "1:1",
     image: (
@@ -54,8 +52,15 @@ const DecorateTree: FrameHandler<
         justifyContent="center"
         position="relative"
       >
-        <Box position="absolute" top="0" bottom="0" left="0" right="0">
-          <Image src="/static/decorate-bg.png" />
+        <Box
+          position="absolute"
+          alignItems="center"
+          top="0"
+          bottom="0"
+          left="0"
+          right="0"
+        >
+          <Image src="/static/decorate-bg.png" height="100%" width="100%" />
         </Box>
         <Box flexDirection="row" gap="6">
           <Box flexDirection="column" gap="6">

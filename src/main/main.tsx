@@ -10,7 +10,7 @@ const HomePage: FrameHandler<EnvState, typeof PATH.HOME, BlankInput> = async (
 ) => {
   return c.res({
     imageAspectRatio: "1.91:1",
-    image: <Image src="/static/cover.png" width="100%" height="100%" />,
+    image: <Image src="/static/cover.png" height="100%" width="100%" />,
     intents: [
       <Button action={genPath(PATH.TREE_HOME, { id: "0" })}>Example</Button>,
       <Button action={PATH.CREATE_TREE}>Create Tree</Button>,

@@ -13,6 +13,10 @@ import AdornTx from "../src/decorate/adornTx.js";
 import { handle } from "frog/next";
 import BuyXMAS from "../src/buy-xmas/index.js";
 import BuyXMASTx from "../src/decorate/buyXMAStx.js";
+import { getTree } from "../src/contracts/tree.js";
+import { createNeynar } from "frog/middlewares";
+
+const neynar = createNeynar({ apiKey: "NEYNAR_FROG_FM" });
 
 export interface State {
   temp: string;
@@ -27,6 +31,7 @@ export interface State {
   create: {
     bgId: number;
     nextTreeId: number;
+    createdTreeId: number;
     bgCount: number;
     bgPrices: string[] | null;
     xmasBalance: string | null;
@@ -53,7 +58,7 @@ export type EnvState = Env & { State: State };
 export const app = new Frog<{ State: State }>({
   basePath: "/",
   // browserLocation: "/:path",
-  title: "X-MAS Frame",
+  title: "X-MAS Tree",
   ui: { vars },
   initialState: {
     temp: "",
@@ -68,13 +73,14 @@ export const app = new Frog<{ State: State }>({
     create: {
       bgId: 1,
       nextTreeId: 0,
+      createdTreeId: 0,
       bgCount: 0,
       bgPrices: null,
       xmasBalance: null,
     },
     decorate: {
       currOrnId: 0,
-      page: 1,
+      page: 0,
       pageCount: 1,
       currOrnPrice: "0",
       ornPrices: null,
@@ -91,8 +97,31 @@ export const app = new Frog<{ State: State }>({
 });
 
 app.use("/*", serveStatic({ root: "./public" }));
-app.frame(PATH.HOME, HomePage);
+app.use(PATH.TREE_HOME, async (c, next) => {
+  let treeId = c.req.param("id");
+  if (isNaN(Number(treeId))) treeId = "0";
+
+  const treeContract = getTree();
+  const tree = await treeContract.getTree(treeId);
+
+  // @ts-ignore
+  c.set("tree", {
+    owner: tree.owner,
+    ornamentCount: Number(tree.ornamentCount),
+    bgId: Number(tree.bgId),
+    ornamentIds: tree.ornamentIds.map(Number),
+    adorners: tree.adorners,
+  });
+
+  await next();
+});
+app.use(
+  PATH.CREATE_TREE,
+  neynar.middleware({ features: ["interactor", "cast"] })
+);
+
 app.frame(PATH.TREE_HOME, TreeMain);
+app.frame(PATH.HOME, HomePage);
 app.frame(PATH.DECORATE, DecorateTree);
 app.frame(PATH.DECORATE_CONFIRM, DecorateConfirm);
 app.frame(PATH.CREATE_TREE, CreateTree);
