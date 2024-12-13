@@ -6,7 +6,8 @@
     "typechain": "typechain --target ethers-v6 --out-dir src/typechain src/abi/*.json",
     "build": "tsc && frog vercel-build && mv .vercel/dist/src .vercel/output/functions/api/index.func",
     "dev": "frog dev",
-    "deploy": "vercel"
+    "deploy": "rm -rf .vercel && vercel",
+    "deploy:prod": "vercel --prod"
   },
   "dependencies": {
     "@hono/node-server": "latest",
@@ -18,6 +19,6 @@
   },
   "devDependencies": {
     "typescript": "latest",
-    "vercel": "^39.0.2"
+    "vercel": "^39.2.2"
   }
 }

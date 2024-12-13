@@ -7,7 +7,7 @@ import { TreeSelector } from "./TreeSelector.js";
 import { genPath } from "../utils/genPath.js";
 import { getTree } from "../contracts/tree.js";
 import { formatEther } from "ethers";
-import { getXMAS } from "../contracts/XMAS.js";
+// import { getXMAS } from "../contracts/XMAS.js";
 
 const CreateTree: FrameHandler<
   EnvState,
@@ -33,11 +33,11 @@ const CreateTree: FrameHandler<
       prev.create.bgId = Math.min(prev.create.bgId + 1, bgCount);
     }
 
-    // @ts-ignore
-    const userAddress = c.var.interactor.custodyAddress;
-    prev.create.xmasBalance = await getXMAS()
-      .balanceOf(userAddress)
-      .then((balance) => formatEther(balance));
+    // // @ts-ignore
+    // const userAddress = c.var.interactor.custodyAddress;
+    // prev.create.xmasBalance = await getXMAS()
+    //   .balanceOf(userAddress)
+    //   .then((balance) => formatEther(balance));
   });
 
   const host =
@@ -104,13 +104,12 @@ const CreateTree: FrameHandler<
         ]
       : [
           <Button value="l">⬅️</Button>,
-          //   <Button.Signature target={"/create/tx/" + create.bgId}>
+          <Button value="r">➡️</Button>,
           <Button.Transaction
             target={genPath(PATH.CREATE_TREE_TX, { bgId: create.bgId })}
           >
-            Create
+            Create!
           </Button.Transaction>,
-          <Button value="r">➡️</Button>,
           <Button action={PATH.HOME}>🏠</Button>,
         ],
   });

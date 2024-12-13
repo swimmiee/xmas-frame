@@ -6,14 +6,13 @@ import TreeMain from "../src/tree-view/index.js";
 import CreateTree from "../src/create-tree/index.js";
 import PATH from "../src/routes/path.js";
 import CreateTx from "../src/create-tree/createTx.js";
-import DecorateTree from "../src/decorate/index.jsx";
-import HomePage from "../src/main/main.jsx";
+import DecorateTree from "../src/decorate/index.js";
+import HomePage from "../src/main/main.js";
 import DecorateConfirm from "../src/decorate/confirm.js";
 import AdornTx from "../src/decorate/adornTx.js";
 import { handle } from "frog/next";
 import BuyXMAS from "../src/buy-xmas/index.js";
 import BuyXMASTx from "../src/decorate/buyXMAStx.js";
-import { createNeynar } from "frog/middlewares";
 
 export interface State {
   temp: string;
@@ -38,6 +37,7 @@ export interface State {
     currOrnId: number;
     currOrnPrice: string;
     page: number;
+    pageCount: number;
   };
   buyXMAS: {
     price10: string;
@@ -50,11 +50,9 @@ export interface State {
 
 export type EnvState = Env & { State: State };
 
-const neynar = createNeynar({ apiKey: "NEYNAR_FROG_FM" });
 export const app = new Frog<{ State: State }>({
   basePath: "/",
   // browserLocation: "/:path",
-  hub: neynar.hub(),
   title: "X-MAS Frame",
   ui: { vars },
   initialState: {
@@ -76,7 +74,8 @@ export const app = new Frog<{ State: State }>({
     },
     decorate: {
       currOrnId: 0,
-      page: 0,
+      page: 1,
+      pageCount: 1,
       currOrnPrice: "0",
       ornPrices: null,
       ornCount: 0,
@@ -91,7 +90,6 @@ export const app = new Frog<{ State: State }>({
   },
 });
 
-app.use(neynar.middleware({ features: ["interactor", "cast"] }));
 app.use("/*", serveStatic({ root: "./public" }));
 app.frame(PATH.HOME, HomePage);
 app.frame(PATH.TREE_HOME, TreeMain);
