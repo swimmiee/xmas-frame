@@ -6,7 +6,7 @@ import TreeMain from "../src/tree-view/index.js";
 import CreateTree from "../src/create-tree/index.js";
 import PATH from "../src/routes/path.js";
 import CreateTx from "../src/create-tree/createTx.js";
-import DecorateTree from "../src/decorate";
+import DecorateTree from "../src/decorate/index.jsx";
 import HomePage from "../src/main/main.jsx";
 import DecorateConfirm from "../src/decorate/confirm.js";
 import AdornTx from "../src/decorate/adornTx.js";
