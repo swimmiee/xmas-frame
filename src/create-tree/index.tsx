@@ -22,12 +22,14 @@ const CreateTree: FrameHandler<
     const bgPrices = await tree.allBgPrices();
 
     if (c.transactionId) {
+      if (prev.create.createdTreeId) return;
       // prev.create.nextTreeId = prev.create.nextTreeId - 1;
       const prv = provider();
       const r = await prv.getTransactionReceipt(c.transactionId);
       const createdTreeId = Number(
-        BigInt(r?.logs[r.logs.length - 1].topics[2] ?? "0x0")
+        BigInt(r?.logs[r.logs.length - 1].topics[2] ?? "0")
       );
+      console.log(createdTreeId);
       prev.create.createdTreeId = createdTreeId;
     } else {
       prev.create.nextTreeId = Number(await tree.nextTreeId());
@@ -51,6 +53,8 @@ const CreateTree: FrameHandler<
       .then((balance) => formatEther(balance));
   });
 
+  console.log(create.createdTreeId);
+
   const host =
     typeof window !== "undefined"
       ? window.location.origin
@@ -58,7 +62,7 @@ const CreateTree: FrameHandler<
   const postUrl = `${host}${genPath(PATH.TREE_HOME, {
     id: create.createdTreeId,
   })}`;
-  const href = `https://warpcast.com/~/compose?text=${postUrl}`;
+  const href = `https://warpcast.com/~/compose?embeds[]=${postUrl}`;
 
   return c.res({
     imageAspectRatio: "1:1",
