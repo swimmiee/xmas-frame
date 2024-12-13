@@ -1,7 +1,7 @@
 import PATH from "../routes/path.js";
 import { Button, FrameHandler } from "frog";
 import { BlankInput } from "hono/types";
-import { Box, Text } from "../ui.js";
+import { Box, Text, Image } from "../ui.js";
 import { EnvState } from "../../api";
 import { TreeSelector } from "./TreeSelector.js";
 import { genPath } from "../utils/genPath.js";
@@ -53,8 +53,6 @@ const CreateTree: FrameHandler<
       .then((balance) => formatEther(balance));
   });
 
-  console.log(create.createdTreeId);
-
   const host =
     typeof window !== "undefined"
       ? window.location.origin
@@ -75,38 +73,60 @@ const CreateTree: FrameHandler<
         background="xgreen"
         position="relative"
       >
-        <TreeSelector no={create.bgId} />
-        <Box position="absolute" top="24" fontWeight="700">
-          <Text color="text" size="18">
-            Create My Tree 🎄
-          </Text>
-          <Text align="center" color="text" size="10">
-            {create.xmasBalance && `(My Balance: ${create.xmasBalance} XMAS)`}
-          </Text>
-        </Box>
         <Box
           position="absolute"
-          bottom="16"
-          fontWeight="700"
           alignItems="center"
+          top="0"
+          bottom="0"
+          left="0"
+          right="0"
         >
-          <Text color="text" size="14">
-            {create.bgId} / {create.bgCount}
-          </Text>
-          {create.bgPrices && (
-            <Box flexDirection="row" gap="3">
-              <Text color="text" size="14">
-                Price:
-              </Text>
-              <Text color="yellow" size="14">
-                {create.bgPrices![create.bgId - 1]}
-              </Text>
-              <Text color="text" size="14">
-                XMAS
-              </Text>
-            </Box>
+          <Image
+            src={
+              c.transactionId
+                ? "/static/create-tree-done.png"
+                : "/static/create-my-tree.png"
+            }
+            height="100%"
+            width="360"
+          />
+        </Box>
+
+        <TreeSelector no={create.bgId} />
+
+        <Box position="absolute" top="40" fontWeight="700">
+          {!Boolean(c.transactionId) && (
+            <Text align="center" color="text" size="10">
+              {create.xmasBalance && `(My Balance: ${create.xmasBalance} XMAS)`}
+            </Text>
           )}
         </Box>
+
+        {!Boolean(c.transactionId) && (
+          <Box
+            position="absolute"
+            bottom="16"
+            fontWeight="700"
+            alignItems="center"
+          >
+            <Text color="text" size="14">
+              {create.bgId} / {create.bgCount}
+            </Text>
+            {create.bgPrices && (
+              <Box flexDirection="row" gap="3">
+                <Text color="text" size="14">
+                  Price:
+                </Text>
+                <Text color="yellow" size="14">
+                  {create.bgPrices![create.bgId - 1]}
+                </Text>
+                <Text color="text" size="14">
+                  XMAS
+                </Text>
+              </Box>
+            )}
+          </Box>
+        )}
       </Box>
     ),
     intents: c.transactionId
