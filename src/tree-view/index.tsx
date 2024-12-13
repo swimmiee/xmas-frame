@@ -1,6 +1,6 @@
 import { Button, FrameHandler } from "frog";
 import { Box } from "../ui.js";
-import { TreeBackground } from "./TreeBackground";
+import { TreeBackground } from "./TreeBackground.js";
 import { PlainTree } from "./PlainTree.js";
 import { Ornament } from "./Ornament.js";
 import { BlankInput } from "hono/types";

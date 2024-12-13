@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type { XMAS, XMASInterface } from "../XMAS";
+import type { XMAS, XMASInterface } from "../XMAS.js";
 
 const _abi = [
   {

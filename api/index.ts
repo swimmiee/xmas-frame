@@ -1,18 +1,18 @@
 import { serveStatic } from "@hono/node-server/serve-static";
 import { Env, Frog } from "frog";
-import { vars } from "../src/ui.ts";
+import { vars } from "../src/ui.js";
 import { devtools } from "frog/dev";
-import TreeMain from "../src/tree-view";
-import CreateTree from "../src/create-tree";
-import PATH from "../src/routes/path.ts";
-import CreateTx from "../src/create-tree/createTx.ts";
+import TreeMain from "../src/tree-view/index.js";
+import CreateTree from "../src/create-tree/index.js";
+import PATH from "../src/routes/path.js";
+import CreateTx from "../src/create-tree/createTx.js";
 import DecorateTree from "../src/decorate";
-import HomePage from "../src/main/main.tsx";
-import DecorateConfirm from "../src/decorate/confirm.tsx";
-import AdornTx from "../src/decorate/adornTx.ts";
+import HomePage from "../src/main/main.jsx";
+import DecorateConfirm from "../src/decorate/confirm.js";
+import AdornTx from "../src/decorate/adornTx.js";
 import { handle } from "frog/next";
-import BuyXMAS from "../src/buy-xmas";
-import BuyXMASTx from "../src/decorate/buyXMAStx.ts";
+import BuyXMAS from "../src/buy-xmas/index.js";
+import BuyXMASTx from "../src/decorate/buyXMAStx.js";
 import { createNeynar } from "frog/middlewares";
 
 export interface State {
