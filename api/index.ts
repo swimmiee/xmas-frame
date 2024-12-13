@@ -14,9 +14,8 @@ import { handle } from "frog/next";
 import BuyXMAS from "../src/buy-xmas/index.js";
 import BuyXMASTx from "../src/decorate/buyXMAStx.js";
 import { getTree } from "../src/contracts/tree.js";
-import { createNeynar } from "frog/middlewares";
-
-const neynar = createNeynar({ apiKey: "NEYNAR_FROG_FM" });
+// import { createNeynar } from "frog/middlewares";
+// const neynar = createNeynar({ apiKey: "NEYNAR_FROG_FM" });
 
 export interface State {
   temp: string;
@@ -115,10 +114,10 @@ app.use(PATH.TREE_HOME, async (c, next) => {
 
   await next();
 });
-app.use(
-  PATH.CREATE_TREE,
-  neynar.middleware({ features: ["interactor", "cast"] })
-);
+// app.use(
+//   PATH.CREATE_TREE,
+//   neynar.middleware({ features: ["interactor", "cast"] })
+// );
 
 app.frame(PATH.TREE_HOME, TreeMain);
 app.frame(PATH.HOME, HomePage);

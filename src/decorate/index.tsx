@@ -17,13 +17,14 @@ const DecorateTree: FrameHandler<
   const treeId = c.req.param("id"); // URL에서 id 값 추출
   const { decorate } = await c.deriveState(async (prev) => {
     const tree = getTree();
+
     const ornCount = Number(await tree.ornamentCount());
     const pageCount = Math.ceil(ornCount / PAGE_ITEM_COUNT) - 1;
     const ornPrices = await tree.allOrnamentPrices();
-
     prev.decorate.ornPrices = ornPrices.map(formatEther);
     prev.decorate.ornCount = ornCount;
     prev.decorate.pageCount = pageCount;
+
     if (c.buttonValue === "l") {
       prev.decorate.page = Math.max(prev.decorate.page - 1, 0);
     }

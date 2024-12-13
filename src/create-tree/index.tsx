@@ -8,7 +8,7 @@ import { genPath } from "../utils/genPath.js";
 import { getTree } from "../contracts/tree.js";
 import { formatEther } from "ethers";
 import { provider } from "../contracts/provider.js";
-import { getXMAS } from "../contracts/XMAS.js";
+// import { getXMAS } from "../contracts/XMAS.js";
 
 const CreateTree: FrameHandler<
   EnvState,
@@ -29,7 +29,6 @@ const CreateTree: FrameHandler<
       const createdTreeId = Number(
         BigInt(r?.logs[r.logs.length - 1].topics[2] ?? "0")
       );
-      console.log(createdTreeId);
       prev.create.createdTreeId = createdTreeId;
     } else {
       prev.create.nextTreeId = Number(await tree.nextTreeId());
@@ -37,6 +36,7 @@ const CreateTree: FrameHandler<
 
     prev.create.bgPrices = bgPrices.map((p) => String(+formatEther(p)));
     prev.create.bgCount = bgCount;
+
     if (buttonValue === "l") {
       prev.create.bgId = Math.max(prev.create.bgId - 1, 1);
     }
@@ -44,13 +44,15 @@ const CreateTree: FrameHandler<
       prev.create.bgId = Math.min(prev.create.bgId + 1, bgCount);
     }
 
-    // @ts-ignore
-    if (!c?.var?.interactor?.custodyAddress) return;
-    // @ts-ignore
-    const userAddress = c.var!.interactor!.custodyAddress;
-    prev.create.xmasBalance = await getXMAS()
-      .balanceOf(userAddress)
-      .then((balance) => formatEther(balance));
+    // try {
+    //   // @ts-ignore
+    //   if (!c?.var?.interactor?.custodyAddress) return;
+    //   // @ts-ignore
+    //   const userAddress = c.var!.interactor!.custodyAddress;
+    //   prev.create.xmasBalance = await getXMAS()
+    //     .balanceOf(userAddress)
+    //     .then((balance) => formatEther(balance));
+    // } catch (error) {}
   });
 
   const host =
