@@ -14,9 +14,12 @@ import { handle } from "frog/next";
 import BuyXMAS from "../src/buy-xmas/index.js";
 import BuyXMASTx from "../src/decorate/buyXMAStx.js";
 import { getTree } from "../src/contracts/tree.js";
+import SearchMyTree from "../src/search/index.js";
+import MyTrees from "../src/search/MyTrees.js";
 // import { createNeynar } from "frog/middlewares";
 // const neynar = createNeynar({ apiKey: "NEYNAR_FROG_FM" });
 
+type SearchState = "None" | "Invalid" | "ValidAddr";
 export interface State {
   temp: string;
   tree: {
@@ -30,6 +33,7 @@ export interface State {
   create: {
     bgId: number;
     nextTreeId: number;
+    userAddress: string;
     createdTreeId: number;
     bgCount: number;
     bgPrices: string[] | null;
@@ -49,6 +53,12 @@ export interface State {
     price1000: string;
     reserve: string;
     swappedAmount: string;
+  };
+  search_tree: {
+    state: SearchState;
+    page: number;
+    ownedCount: number;
+    ownedTrees: { treeId: number; ornamentCount: number; bgId: number }[];
   };
 }
 
@@ -76,6 +86,7 @@ export const app = new Frog<{ State: State }>({
       bgCount: 0,
       bgPrices: null,
       xmasBalance: null,
+      userAddress: "",
     },
     decorate: {
       currOrnId: 0,
@@ -92,6 +103,12 @@ export const app = new Frog<{ State: State }>({
       reserve: "-",
       swappedAmount: "-",
     },
+    search_tree: {
+      state: "None",
+      page: 0,
+      ownedCount: 0,
+      ownedTrees: [],
+    },
   },
 });
 
@@ -102,7 +119,6 @@ app.use(PATH.TREE_HOME, async (c, next) => {
 
   const treeContract = getTree();
   const tree = await treeContract.getTree(treeId);
-
   // @ts-ignore
   c.set("tree", {
     owner: tree.owner,
@@ -125,6 +141,9 @@ app.frame(PATH.DECORATE, DecorateTree);
 app.frame(PATH.DECORATE_CONFIRM, DecorateConfirm);
 app.frame(PATH.CREATE_TREE, CreateTree);
 app.frame(PATH.BUY_XMAS, BuyXMAS);
+app.frame(PATH.SEARCH_TREE, SearchMyTree);
+app.frame(PATH.MY_TREES, MyTrees);
+app.frame(PATH.MY_TREES_ADDR, MyTrees);
 
 app.transaction(PATH.CREATE_TREE_TX, CreateTx);
 app.transaction(PATH.DECORATE_TX, AdornTx);

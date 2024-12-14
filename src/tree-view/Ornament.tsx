@@ -4,7 +4,7 @@ interface OrnamentProps {
   position: number;
   itemId: number;
 }
-const POSITIONS = [
+export const POSITIONS = [
   [512, 755],
   [505, 660],
   [480, 560],

@@ -13,6 +13,7 @@ const HomePage: FrameHandler<EnvState, typeof PATH.HOME, BlankInput> = async (
     image: <Image src="/static/cover.png" height="100%" width="100%" />,
     intents: [
       <Button action={genPath(PATH.TREE_HOME, { id: "0" })}>Example</Button>,
+      <Button action={genPath(PATH.SEARCH_TREE, { id: "0" })}>My Tree</Button>,
       <Button action={PATH.CREATE_TREE}>Create Tree</Button>,
       <Button action={PATH.BUY_XMAS}>Buy $XMAS</Button>,
     ],

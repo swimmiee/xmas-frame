@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type { XmasTree, XmasTreeInterface } from "../XmasTree.js";
+import type { XmasTree, XmasTreeInterface } from "../XmasTree";
 
 const _abi = [
   {
@@ -511,6 +511,62 @@ const _abi = [
         internalType: "contract XMAS",
         name: "",
         type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "from",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "count",
+        type: "uint256",
+      },
+    ],
+    name: "ownedTreeList",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "treeId",
+            type: "uint256",
+          },
+          {
+            internalType: "uint8",
+            name: "ornamentCount",
+            type: "uint8",
+          },
+          {
+            internalType: "uint32[12]",
+            name: "ornamentIds",
+            type: "uint32[12]",
+          },
+          {
+            internalType: "uint32",
+            name: "bgId",
+            type: "uint32",
+          },
+        ],
+        internalType: "struct IXmasTree.TreeBase[]",
+        name: "result",
+        type: "tuple[]",
+      },
+      {
+        internalType: "uint256",
+        name: "ownedCount",
+        type: "uint256",
       },
     ],
     stateMutability: "view",

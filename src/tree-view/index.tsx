@@ -46,6 +46,7 @@ const TreeMain: FrameHandler<
       <Button action={genPath(PATH.DECORATE, { id: treeId })}>
         Decorate ⭐️
       </Button>,
+      <Button action={PATH.SEARCH_TREE}>My Tree</Button>,
       <Button action={PATH.HOME}>🏠</Button>,
     ],
   });

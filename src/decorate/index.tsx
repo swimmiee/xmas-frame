@@ -13,7 +13,7 @@ const DecorateTree: FrameHandler<
   typeof PATH.DECORATE,
   BlankInput
 > = async (c) => {
-  const PAGE_ITEM_COUNT = 6;
+  const PAGE_ITEM_COUNT = 4;
   const treeId = c.req.param("id"); // URL에서 id 값 추출
   const { decorate } = await c.deriveState(async (prev) => {
     const tree = getTree();

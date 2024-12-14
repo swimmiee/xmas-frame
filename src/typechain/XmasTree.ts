@@ -21,7 +21,7 @@ import type {
   TypedLogDescription,
   TypedListener,
   TypedContractMethod,
-} from "./common.js";
+} from "./common";
 
 export declare namespace IXmasTree {
   export type TreeStruct = {
@@ -47,6 +47,25 @@ export declare namespace IXmasTree {
     ornamentIds: bigint[];
     adorners: string[];
     minted: boolean;
+  };
+
+  export type TreeBaseStruct = {
+    treeId: BigNumberish;
+    ornamentCount: BigNumberish;
+    ornamentIds: BigNumberish[];
+    bgId: BigNumberish;
+  };
+
+  export type TreeBaseStructOutput = [
+    treeId: bigint,
+    ornamentCount: bigint,
+    ornamentIds: bigint[],
+    bgId: bigint
+  ] & {
+    treeId: bigint;
+    ornamentCount: bigint;
+    ornamentIds: bigint[];
+    bgId: bigint;
   };
 }
 
@@ -78,6 +97,7 @@ export interface XmasTreeInterface extends Interface {
       | "transferOwnership"
       | "withdraw"
       | "xmas"
+      | "ownedTreeList"
   ): FunctionFragment;
 
   getEvent(
@@ -175,6 +195,10 @@ export interface XmasTreeInterface extends Interface {
     values: [AddressLike]
   ): string;
   encodeFunctionData(functionFragment: "xmas", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "ownedTreeList",
+    values: [AddressLike, BigNumberish, BigNumberish]
+  ): string;
 
   decodeFunctionResult(functionFragment: "adorn", data: BytesLike): Result;
   decodeFunctionResult(
@@ -246,6 +270,10 @@ export interface XmasTreeInterface extends Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "xmas", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "ownedTreeList",
+    data: BytesLike
+  ): Result;
 }
 
 export namespace AdornEvent {
@@ -436,6 +464,17 @@ export interface XmasTree extends BaseContract {
 
   xmas: TypedContractMethod<[], [string], "view">;
 
+  ownedTreeList: TypedContractMethod<
+    [account: AddressLike, from: BigNumberish, count: BigNumberish],
+    [
+      [IXmasTree.TreeBaseStructOutput[], bigint] & {
+        result: IXmasTree.TreeBaseStructOutput[];
+        ownedCount: bigint;
+      }
+    ],
+    "view"
+  >;
+
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
@@ -543,6 +582,18 @@ export interface XmasTree extends BaseContract {
   getFunction(
     nameOrSignature: "xmas"
   ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "ownedTreeList"
+  ): TypedContractMethod<
+    [account: AddressLike, from: BigNumberish, count: BigNumberish],
+    [
+      [IXmasTree.TreeBaseStructOutput[], bigint] & {
+        result: IXmasTree.TreeBaseStructOutput[];
+        ownedCount: bigint;
+      }
+    ],
+    "view"
+  >;
 
   getEvent(
     key: "Adorn"

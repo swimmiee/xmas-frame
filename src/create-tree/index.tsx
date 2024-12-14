@@ -26,10 +26,12 @@ const CreateTree: FrameHandler<
       // prev.create.nextTreeId = prev.create.nextTreeId - 1;
       const prv = provider();
       const r = await prv.getTransactionReceipt(c.transactionId);
+      if (!r) return;
       const createdTreeId = Number(
-        BigInt(r?.logs[r.logs.length - 1].topics[2] ?? "0")
+        BigInt(r.logs[r.logs.length - 1].topics[2] ?? "0")
       );
       prev.create.createdTreeId = createdTreeId;
+      prev.create.userAddress = r.from;
     } else {
       prev.create.nextTreeId = Number(await tree.nextTreeId());
     }
@@ -55,14 +57,6 @@ const CreateTree: FrameHandler<
     // } catch (error) {}
   });
 
-  const host =
-    typeof window !== "undefined"
-      ? window.location.origin
-      : "https://xmas-tree-pi.vercel.app";
-  const postUrl = `${host}${genPath(PATH.TREE_HOME, {
-    id: create.createdTreeId,
-  })}`;
-  const href = `https://warpcast.com/~/compose?embeds[]=${postUrl}`;
 
   return c.res({
     imageAspectRatio: "1:1",
@@ -133,9 +127,15 @@ const CreateTree: FrameHandler<
     ),
     intents: c.transactionId
       ? [
-          <Button.Link href={href}>Post</Button.Link>,
+          <Button
+            action={genPath(PATH.MY_TREES_ADDR, {
+              address: create.userAddress,
+            })}
+          >
+            My Trees
+          </Button>,
           <Button action={genPath(PATH.TREE_HOME, { id: create.nextTreeId })}>
-            View My Tree 🎄
+            View Tree 🎄
           </Button>,
         ]
       : [

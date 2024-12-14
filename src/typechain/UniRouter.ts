@@ -19,7 +19,7 @@ import type {
   TypedEventLog,
   TypedListener,
   TypedContractMethod,
-} from "./common.js";
+} from "./common";
 
 export interface UniRouterInterface extends Interface {
   getFunction(

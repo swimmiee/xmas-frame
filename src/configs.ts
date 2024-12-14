@@ -35,10 +35,10 @@ export const CONFIGS = {
       chainId: BaseSepolia,
       rpcUrl: "https://sepolia.base.org",
       contracts: {
-        XmasTree: "0x52d34B628264a6e06Ce7788a0166e7e266947558",
-        XMAS: "0x946008428443a60b9142cBF2F3570DcB5bFcCff3",
+        XmasTree: "0xc17c152742f8Bd61CBD72bea5a55d051Ca0cD4Cf",
+        XMAS: "0x9dEcA4f5a9f8CF081f36A0D4fa59BCA2D712D9b9",
         owner: "0x22E4Ee2e606716d9CCB0e987e77b3c9b10c8D45E",
-        pair: "0xAFdfD52292D35Fd7BC8f8059128a591057Bc38a4",
+        pair: "0x46eb922083502f878cA8EbEA222247c805Dc0bA7",
         factory: "0x7Ae58f10f7849cA6F5fB71b7f45CB416c9204b1e",
         router: "0x1689E7B1F10000AE47eBfE339a4f69dECd19F602",
         WETH: "0x4200000000000000000000000000000000000006",

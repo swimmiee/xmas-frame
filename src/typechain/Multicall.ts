@@ -19,7 +19,7 @@ import type {
   TypedEventLog,
   TypedListener,
   TypedContractMethod,
-} from "./common.js";
+} from "./common";
 
 export declare namespace Multicall2 {
   export type CallStruct = { target: AddressLike; callData: BytesLike };

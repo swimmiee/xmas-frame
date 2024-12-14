@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type { UniRouter, UniRouterInterface } from "../UniRouter.js";
+import type { UniRouter, UniRouterInterface } from "../UniRouter";
 
 const _abi = [
   {
